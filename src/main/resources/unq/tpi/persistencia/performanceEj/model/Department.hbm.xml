@@ -14,7 +14,7 @@
 			<column name="dept_name" />
 		</property>
 
-		<set name="employees" table="dept_emp" where="to_date = '9999-01-01'" lazy="false" fetch="join">
+		<set name="employees" table="dept_emp" where="to_date = '9999-01-01'" lazy="true" fetch="join">
 			<key>
 				<column name="dept_no" sql-type="char(4)"></column>
 			</key>
@@ -22,7 +22,7 @@
 				class="unq.tpi.persistencia.performanceEj.model.Employee" />
 		</set>
 
-		<set name="historicEmployees" table="dept_emp" where="to_date != '9999-01-01'">
+		<set name="historicEmployees" table="dept_emp" lazy="true" where="to_date != '9999-01-01'">
 			<key>
 				<column name="dept_no" sql-type="char(4)"></column>
 			</key>
@@ -31,7 +31,7 @@
 				class="unq.tpi.persistencia.performanceEj.model.Employee" />
 		</set>
 
-		<bag name="managers" table="dept_manager" order-by="from_date">
+		<bag name="managers" table="dept_manager" lazy="true" order-by="from_date">
 			<key>
 				<column name="dept_no" sql-type="char(4)"></column>
 			</key>
