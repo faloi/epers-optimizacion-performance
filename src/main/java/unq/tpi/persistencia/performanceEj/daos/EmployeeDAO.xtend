@@ -14,8 +14,15 @@ class EmployeeDAO {
 	}
 
 	def getAll() {
-		val session = SessionManager.getSession()
-		session.createCriteria(Employee).list() as List<Employee>
+		SessionManager.getSession()
+		.createQuery('''
+			from Employee as e 
+			inner join fetch e.salaries as s
+			where s.to = '9999-01-01'
+			order by s.amount desc
+		''')
+		.setMaxResults(11)
+		.list as List<Employee>
 	}
 
 	def getByCode(int id) {
